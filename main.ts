@@ -140,7 +140,10 @@ PLAYER1.setPosition(74, 82)
 controller.moveSprite(PLAYER1)
 PLAYER1.setVelocity(0, 0)
 game.onUpdateInterval(72000, function () {
-    if (info.score() == 69) {
+    if (info.score() > 69) {
+        game.setGameOverMessage(false, "GAME OVER!")
+        game.splash("SCORE=", info.score())
+    } else {
         game.gameOver(true)
         game.setGameOverEffect(true, effects.confetti)
     }
@@ -151,6 +154,10 @@ game.onUpdateInterval(1000, function () {
 game.onUpdateInterval(1000, function () {
     coin = sprites.create(assets.image`food`, SpriteKind.Food)
     coin.setPosition(randint(0, 120), randint(0, 120))
+    if (info.score() == 69) {
+        game.gameOver(true)
+        game.setGameOverEffect(true, effects.confetti)
+    }
 })
 game.onUpdateInterval(100, function () {
     if (info.score() > 69) {
